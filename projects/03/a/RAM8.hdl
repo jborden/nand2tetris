@@ -15,5 +15,30 @@ CHIP RAM8 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    DMux8Way(in=in[0],sel=address,a=in0DMuxa,b=in0DMuxb,c=in0DMuxc,d=in0DMuxd,e=in0DMuxe,f=in0DMuxf,g=in0DMuxg,h=in0DMuxh);
+    DMux8Way(in=in[1],sel=address,a=in1DMuxa,b=in1DMuxb,c=in1DMuxc,d=in1DMuxd,e=in1DMuxe,f=in1DMuxf,g=in1DMuxg,h=in1DMuxh);
+    DMux8Way(in=in[2],sel=address,a=in2DMuxa,b=in2DMuxb,c=in2DMuxc,d=in2DMuxd,e=in2DMuxe,f=in2DMuxf,g=in2DMuxg,h=in2DMuxh);
+    DMux8Way(in=in[3],sel=address,a=in3DMuxa,b=in3DMuxb,c=in3DMuxc,d=in3DMuxd,e=in3DMuxe,f=in3DMuxf,g=in3DMuxg,h=in3DMuxh);
+    DMux8Way(in=in[4],sel=address,a=in4DMuxa,b=in4DMuxb,c=in4DMuxc,d=in4DMuxd,e=in4DMuxe,f=in4DMuxf,g=in4DMuxg,h=in4DMuxh);
+    DMux8Way(in=in[5],sel=address,a=in5DMuxa,b=in5DMuxb,c=in5DMuxc,d=in5DMuxd,e=in5DMuxe,f=in5DMuxf,g=in5DMuxg,h=in5DMuxh);
+    DMux8Way(in=in[6],sel=address,a=in6DMuxa,b=in6DMuxb,c=in6DMuxc,d=in6DMuxd,e=in6DMuxe,f=in6DMuxf,g=in6DMuxg,h=in6DMuxh);
+    DMux8Way(in=in[7],sel=address,a=in7DMuxa,b=in7DMuxb,c=in7DMuxc,d=in7DMuxd,e=in7DMuxe,f=in7DMuxf,g=in7DMuxg,h=in7DMuxh);
+    DMux8Way(in=in[8],sel=address,a=in8DMuxa,b=in8DMuxb,c=in8DMuxc,d=in8DMuxd,e=in8DMuxe,f=in8DMuxf,g=in8DMuxg,h=in8DMuxh);
+    DMux8Way(in=in[9],sel=address,a=in9DMuxa,b=in9DMuxb,c=in9DMuxc,d=in9DMuxd,e=in9DMuxe,f=in9DMuxf,g=in9DMuxg,h=in9DMuxh);
+    DMux8Way(in=in[10],sel=address,a=in10DMuxa,b=in10DMuxb,c=in10DMuxc,d=in10DMuxd,e=in10DMuxe,f=in10DMuxf,g=in10DMuxg,h=in10DMuxh);
+    DMux8Way(in=in[11],sel=address,a=in11DMuxa,b=in11DMuxb,c=in11DMuxc,d=in11DMuxd,e=in11DMuxe,f=in11DMuxf,g=in11DMuxg,h=in11DMuxh);
+    DMux8Way(in=in[12],sel=address,a=in12DMuxa,b=in12DMuxb,c=in12DMuxc,d=in12DMuxd,e=in12DMuxe,f=in12DMuxf,g=in12DMuxg,h=in12DMuxh);
+    DMux8Way(in=in[13],sel=address,a=in13DMuxa,b=in13DMuxb,c=in13DMuxc,d=in13DMuxd,e=in13DMuxe,f=in13DMuxf,g=in13DMuxg,h=in13DMuxh);
+    DMux8Way(in=in[14],sel=address,a=in14DMuxa,b=in14DMuxb,c=in14DMuxc,d=in14DMuxd,e=in14DMuxe,f=in14DMuxf,g=in14DMuxg,h=in14DMuxh);
+    DMux8Way(in=in[15],sel=address,a=in15DMuxa,b=in15DMuxb,c=in15DMuxc,d=in15DMuxd,e=in15DMuxe,f=in15DMuxf,g=in15DMuxg,h=in15DMuxh);
+    DMux8Way(in=load,sel=address,a=loadDMuxa,b=loadDMuxb,c=loadDMuxc,d=loadDMuxd,e=loadDMuxe,f=loadDMuxf,g=loadDMuxg,h=loadDMuxh);
+    Register(in[0]=in0DMuxa,in[1]=in1DMuxa,in[2]=in2DMuxa,in[3]=in3DMuxa,in[4]=in4DMuxa,in[5]=in5DMuxa,in[6]=in6DMuxa,in[7]=in7DMuxa,in[8]=in8DMuxa,in[9]=in9DMuxa,in[10]=in10DMuxa,in[11]=in11DMuxa,in[12]=in12DMuxa,in[13]=in13DMuxa,in[14]=in14DMuxa,in[15]=in15DMuxa,load=loadDMuxa,out=Register0);
+    Register(in[0]=in0DMuxb,in[1]=in1DMuxb,in[2]=in2DMuxb,in[3]=in3DMuxb,in[4]=in4DMuxb,in[5]=in5DMuxb,in[6]=in6DMuxb,in[7]=in7DMuxb,in[8]=in8DMuxb,in[9]=in9DMuxb,in[10]=in10DMuxb,in[11]=in11DMuxb,in[12]=in12DMuxb,in[13]=in13DMuxb,in[14]=in14DMuxb,in[15]=in15DMuxb,load=loadDMuxb,out=Register1);
+    Register(in[0]=in0DMuxc,in[1]=in1DMuxc,in[2]=in2DMuxc,in[3]=in3DMuxc,in[4]=in4DMuxc,in[5]=in5DMuxc,in[6]=in6DMuxc,in[7]=in7DMuxc,in[8]=in8DMuxc,in[9]=in9DMuxc,in[10]=in10DMuxc,in[11]=in11DMuxc,in[12]=in12DMuxc,in[13]=in13DMuxc,in[14]=in14DMuxc,in[15]=in15DMuxc,load=loadDMuxc,out=Register2);
+    Register(in[0]=in0DMuxd,in[1]=in1DMuxd,in[2]=in2DMuxd,in[3]=in3DMuxd,in[4]=in4DMuxd,in[5]=in5DMuxd,in[6]=in6DMuxd,in[7]=in7DMuxd,in[8]=in8DMuxd,in[9]=in9DMuxd,in[10]=in10DMuxd,in[11]=in11DMuxd,in[12]=in12DMuxd,in[13]=in13DMuxd,in[14]=in14DMuxd,in[15]=in15DMuxd,load=loadDMuxd,out=Register3);
+    Register(in[0]=in0DMuxe,in[1]=in1DMuxe,in[2]=in2DMuxe,in[3]=in3DMuxe,in[4]=in4DMuxe,in[5]=in5DMuxe,in[6]=in6DMuxe,in[7]=in7DMuxe,in[8]=in8DMuxe,in[9]=in9DMuxe,in[10]=in10DMuxe,in[11]=in11DMuxe,in[12]=in12DMuxe,in[13]=in13DMuxe,in[14]=in14DMuxe,in[15]=in15DMuxe,load=loadDMuxe,out=Register4);
+    Register(in[0]=in0DMuxf,in[1]=in1DMuxf,in[2]=in2DMuxf,in[3]=in3DMuxf,in[4]=in4DMuxf,in[5]=in5DMuxf,in[6]=in6DMuxf,in[7]=in7DMuxf,in[8]=in8DMuxf,in[9]=in9DMuxf,in[10]=in10DMuxf,in[11]=in11DMuxf,in[12]=in12DMuxf,in[13]=in13DMuxf,in[14]=in14DMuxf,in[15]=in15DMuxf,load=loadDMuxf,out=Register5);
+    Register(in[0]=in0DMuxg,in[1]=in1DMuxg,in[2]=in2DMuxg,in[3]=in3DMuxg,in[4]=in4DMuxg,in[5]=in5DMuxg,in[6]=in6DMuxg,in[7]=in7DMuxg,in[8]=in8DMuxg,in[9]=in9DMuxg,in[10]=in10DMuxg,in[11]=in11DMuxg,in[12]=in12DMuxg,in[13]=in13DMuxg,in[14]=in14DMuxg,in[15]=in15DMuxg,load=loadDMuxg,out=Register6);
+    Register(in[0]=in0DMuxh,in[1]=in1DMuxh,in[2]=in2DMuxh,in[3]=in3DMuxh,in[4]=in4DMuxh,in[5]=in5DMuxh,in[6]=in6DMuxh,in[7]=in7DMuxh,in[8]=in8DMuxh,in[9]=in9DMuxh,in[10]=in10DMuxh,in[11]=in11DMuxh,in[12]=in12DMuxh,in[13]=in13DMuxh,in[14]=in14DMuxh,in[15]=in15DMuxh,load=loadDMuxh,out=Register7);
+    Mux8Way16(a=Register0,b=Register1,c=Register2,d=Register3,e=Register4,f=Register5,g=Register6,h=Register7,sel=address,out=out);
 }
