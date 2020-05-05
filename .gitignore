@@ -2,26 +2,4 @@
 *~
 \#*\#
 .\#*
-.lein-env
-.nrepl-port
-\target
-profiles.clj
-.lein-failures
-test/jmeter/*.jtl
-test/jmeter/*.log
-.lein-repl-history
-scripts/run-server-jar
-flyway
-\flyway*
-.\*.sql
-resources/auth_privkey.pem
-data/
-*.log
-datasource.sql
-scripts/run-scraper-service
-id_rsa*
-*/id_rsa*
-logs/
-
-/.clj-kondo/.cache
-flyway.conf
+tools/bin/Hardware Simulator.dat
