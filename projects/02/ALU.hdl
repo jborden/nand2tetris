@@ -28,19 +28,42 @@
 
 CHIP ALU {
     IN  
-        x[16], y[16],  // 16-bit inputs        
-        zx, // zero the x input?
-        nx, // negate the x input?
-        zy, // zero the y input?
-        ny, // negate the y input?
-        f,  // compute out = x + y (if 1) or x & y (if 0)
-        no; // negate the out output?
+      x[16], y[16],  // 16-bit inputs        
+      zx, // zero the x input?
+      nx, // negate the x input?
+      zy, // zero the y input?
+      ny, // negate the y input?
+      f,  // compute out = x + y (if 1) or x & y (if 0)
+      no; // negate the out output?
 
     OUT 
-        out[16], // 16-bit output
-        zr, // 1 if (out == 0), 0 otherwise
-        ng; // 1 if (out < 0),  0 otherwise
-
+      out[16], // 16-bit output
+      zr, // 1 if (out == 0), 0 otherwise
+      ng; // 1 if (out < 0),  0 otherwise
+    
     PARTS:
-   // Put you code here:
+    // x pre-setting
+    Mux16(a[0..15]=x[0..15],b[0..15]=false,sel=zx,out[0..15]=xMuxfalse);
+    Not16(in[0..15]=xMuxfalse,out[0..15]=NotxMuxfalse);
+    Mux16(a[0..15]=xMuxfalse,b[0..15]=NotxMuxfalse,sel=nx,out[0..15]=xMuxfalseMuxNotxMuxfalse);
+    // y pre-setting
+    Mux16(a[0..15]=y[0..15],b[0..15]=false,sel=zy,out[0..15]=yMuxfalse);
+    Not16(in[0..15]=yMuxfalse,out[0..15]=NotyMuxfalse);
+    Mux16(a[0..15]=yMuxfalse,b[0..15]=NotyMuxfalse,sel=ny,out[0..15]=yMuxfalseMuxNotyMuxfalse);
+    // x & y
+    And16(a[0..15]=xMuxfalseMuxNotxMuxfalse,b[0..15]=yMuxfalseMuxNotyMuxfalse,out[0..15]=xMuxfalseMuxNotxMuxfalseAndyMuxfalseMuxNotyMuxfalse);
+    // x + y
+    Add16(a[0..15]=xMuxfalseMuxNotxMuxfalse,b[0..15]=yMuxfalseMuxNotyMuxfalse,out[0..15]=xMuxfalseMuxNotxMuxfalseAdd16yMuxfalseMuxNotyMuxfalse);
+    // f
+    Mux16(a[0..15]=xMuxfalseMuxNotxMuxfalseAndyMuxfalseMuxNotyMuxfalse,b[0..15]=xMuxfalseMuxNotxMuxfalseAdd16yMuxfalseMuxNotyMuxfalse,sel=f,out[0..15]=fxy);
+    // not f
+    Not16(in[0..15]=fxy,out[0..15]=notfxy);
+    // no
+    Mux16(a[0..15]=fxy,b[0..15]=notfxy,sel=no,out[0..15]=out[0..15],out[0..7]=subLSB,out[8..15]=subMSB,out[15]=ng);
+    // zr
+    Or8Way(in[0..7]=subLSB,out=OrLSB);
+    Or8Way(in[0..7]=subMSB,out=OrMSB);
+    Or(a=OrLSB,b=OrMSB,out=notzr);
+    Not(in=notzr,out=zr);
+    
 }
