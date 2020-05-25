@@ -39,5 +39,44 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-    // Put your code here:
+    Not(in=instruction[15],out=NotOpcode);
+    Mux16(a=ALUOutput,b=instruction,sel=NotOpcode,out=instructionMux16ALUOutput);
+    // loadRegister
+    And(a=instruction[5],b=instruction[15],out=d1AndOpcode);
+    Or(a=NotOpcode,b=d1AndOpcode,out=NotOpcodeOrd1AndOpcode);
+    ARegister(in=instructionMux16ALUOutput,load=NotOpcodeOrd1AndOpcode,out=Aregister,out[0..14]=addressM[0..14]);
+    // A / M Mux selection bit
+    And(a=instruction[15],b=instruction[12],out=OpcodeAnda);
+    Mux16(a=Aregister,b=inM,sel=OpcodeAnda,out=AregisterMux16inM);
+    // writeM
+    And(a=instruction[15],b=instruction[3],out=writeM);
+    And(a=instruction[4],b=instruction[15],out=d2AndOpcode);
+    DRegister(in=ALUOutput,load=d2AndOpcode,out=Dregister);
+    ALU(x=Dregister,y=AregisterMux16inM,zx=instruction[11],nx=instruction[10],zy=instruction[9],ny=instruction[8],f=instruction[7],no=instruction[6],out=ALUOutput,out=outM,zr=zr,ng=ng);
+    // logic concerning PC counter (Very convoluted, is there a way to simplify?)
+    DMux8Way(in=true,sel[0]=instruction[0],sel[1]=instruction[1],sel[2]=instruction[2],a=a,b=b,c=c,d=d,e=e,f=f,g=g,h=h);
+    // jgt (b)
+    Not(in=zr,out=Notzr);
+    Not(in=ng,out=Notng);
+    And(a=Notzr,b=Notng,out=NotzrAndNotng);
+    And(a=b,b=NotzrAndNotng,out=jgt);
+    // jeq (c)
+    And(a=c,b=zr,out=jeq);
+    // jge (d)
+    Or(a=zr,b=Notng,out=zrOrNotng);
+    And(a=d,b=zrOrNotng,out=jge);
+    // jlt (e)
+    And(a=e,b=ng,out=jlt);
+    // jne (f)
+    And(a=f,b=Notzr,out=jne);
+    // jle (g)
+    Or(a=zr,b=ng,out=zrOrng);
+    And(a=g,b=zrOrng,out=jle);
+    // jmp (h)    
+    // we throw away NoJmp and jmp needs no other logic
+    Or8Way(in[0]=false,in[1]=jgt,in[2]=jeq,in[3]=jge,in[4]=jlt,in[5]=jne,in[6]=jle,in[7]=h,out=loadf);
+    And(a=loadf,b=instruction[15],out=setPC);
+    DMux(in=true,sel=setPC,a=inc,b=loadPC);
+    // additional logic to ensure an op code is present
+    PC(in=Aregister,reset=reset,load=loadPC,inc=inc,out[0..14]=pc[0..14]);
 }
