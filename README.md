@@ -4,6 +4,10 @@ This is my implementation of the course work from nand2tetris.org
 
 # Course 1 Completed (projects 0 - 6)
 
+# Helpful Links
+
+https://www.rapidtables.com/calc/math/binary-calculator.html
+
 # License
 Original nand2tetris.zip is version 2.6 and is GPL V3 License
 
